@@ -1,19 +1,54 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Hover Drive</title>
-    <style>
-      body {
-        background-color: #000;
-        color: #0ff;
-        font-family: sans-serif;
-        text-align: center;
-        padding-top: 100px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>🛸 Hover Drive is Online!</h1>
-    <p>First version deployed via GitHub + Vercel</p>
-  </body>
-</html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🚀 Hover Drive</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- External CSS (optional if you make style.css) -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Inline fallback CSS -->
+  <style>
+    body {
+      background-color: #000;
+      color: #0ff;
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      transition: background-color 0.5s ease;
+    }
+
+    .night {
+      background-color: #111;
+      color: #fff;
+    }
+
+    .toggle-button {
+      background-color: #0ff;
+      border: none;
+      color: #000;
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    audio {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🛸 Hover Drive is Online!</h1>
+  <p>My first version deployed via GitHub + Vercel</p>
+
+  <!-- Toggle Button -->
+  <button class="toggle-button" onclick="toggleDayNight()">Toggle Day/Night</button>
+
+  <!-- Music Player -->
+  <audio id="bgMusic" controls loop autoplay>
+    <source src="assets/audio/background-music.mp3" type="audio/mp3">
+    Your browser does not support the audio element
