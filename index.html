@@ -5,12 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hover Drive</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .ui {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding-top: 60px;
+    }
+  </style>
 </head>
 <body>
   <div class="ui">
     <h1>🛸 <span class="highlight">Hover Drive is Online!</span></h1>
     <p>Fly your hovercraft with W / A / D – Hold Shift to boost</p>
-    <button id="toggleTheme">🎡 Toggle Day/Night</button>
+    <button id="toggleTheme">🌞 Toggle Day/Night</button>
     <button id="musicToggle">🎵 Play/Stop Music</button>
   </div>
 
