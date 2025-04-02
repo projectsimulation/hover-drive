@@ -1,54 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>🚀 Hover Drive</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- External CSS (optional if you make style.css) -->
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Inline fallback CSS -->
-  <style>
-    body {
-      background-color: #000;
-      color: #0ff;
-      font-family: sans-serif;
-      text-align: center;
-      padding-top: 100px;
-      transition: background-color 0.5s ease;
-    }
-
-    .night {
-      background-color: #111;
-      color: #fff;
-    }
-
-    .toggle-button {
-      background-color: #0ff;
-      border: none;
-      color: #000;
-      padding: 10px 20px;
-      font-size: 16px;
-      margin-top: 20px;
-      cursor: pointer;
-      border-radius: 8px;
-    }
-
-    audio {
-      margin-top: 30px;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hover Drive</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
 </head>
 <body>
-
   <h1>🛸 Hover Drive is Online!</h1>
-  <p>My first version deployed via GitHub + Vercel</p>
+  <p>Fly your hovercraft with W / A / D – Hold Shift to boost</p>
 
-  <!-- Toggle Button -->
-  <button class="toggle-button" onclick="toggleDayNight()">Toggle Day/Night</button>
+  <button class="toggle-button" onclick="toggleMode()">🌗 Toggle Day/Night</button>
+  <br /><br />
+  <audio id="bgm" src="Wartex_Full_Length.mp3"></audio>
+  <button class="toggle-button" onclick="toggleMusic()">🎵 Play/Stop Music</button>
 
-  <!-- Music Player -->
-  <audio id="bgMusic" controls loop autoplay>
-    <source src="assets/audio/background-music.mp3" type="audio/mp3">
-    Your browser does not support the audio element
+  <div id="three-container"></div>
+
+  <script src="hover.js"></script>
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle("night");
+    }
+
+    function toggleMusic() {
+      const music = document.getElementById("bgm");
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
+    }
+  </script>
+</body>
+</html>
