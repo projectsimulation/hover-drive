@@ -2,36 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hover Drive</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
 </head>
 <body>
-  <h1>🛸 Hover Drive is Online!</h1>
-  <p>Fly your hovercraft with W / A / D – Hold Shift to boost</p>
+  <div class="ui">
+    <h1>🛸 Hover Drive is Online!</h1>
+    <p>Fly your hovercraft with W / A / D – Hold Shift to boost</p>
+    <div class="buttons">
+      <button id="toggleTheme">🎨 Toggle Day/Night</button>
+      <button id="toggleMusic">🎵 Play/Stop Music</button>
+    </div>
+  </div>
 
-  <button class="toggle-button" onclick="toggleMode()">🌗 Toggle Day/Night</button>
-  <br /><br />
-  <audio id="bgm" src="Wartex_Full_Length.mp3"></audio>
-  <button class="toggle-button" onclick="toggleMusic()">🎵 Play/Stop Music</button>
+  <!-- Background Music -->
+  <audio id="bgMusic" loop>
+    <source src="assets/audio/Relax Ambient.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
 
-  <div id="three-container"></div>
-
-  <script src="hover.js"></script>
-  <script>
-    function toggleMode() {
-      document.body.classList.toggle("night");
-    }
-
-    function toggleMusic() {
-      const music = document.getElementById("bgm");
-      if (music.paused) {
-        music.play();
-      } else {
-        music.pause();
-      }
-    }
-  </script>
+  <!-- Scripts -->
+  <script src="script.js"></script>
+  <script type="module" src="hover.js"></script>
 </body>
 </html>
