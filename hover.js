@@ -1,70 +1,55 @@
-import * as THREE from 'https://cdn.skypack.dev/three';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
 
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x101010);
+let scene, camera, renderer, craft, floor;
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(0, 5, 10);
-camera.lookAt(0, 0, 0);
+init();
+animate();
 
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+function init() {
+  // Scene
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x000000);
 
-// Hovercraft
-const geometry = new THREE.BoxGeometry(2, 1, 3);
-const material = new THREE.MeshStandardMaterial({ color: 0x00b3b3 });
-const hovercraft = new THREE.Mesh(geometry, material);
-hovercraft.position.y = 1;
-scene.add(hovercraft);
+  // Camera
+  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.set(0, 2, 5);
 
-// Light
-const light = new THREE.DirectionalLight(0xffffff, 1);
-light.position.set(0, 10, 10);
-scene.add(light);
+  // Renderer
+  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.domElement.style.position = 'fixed';
+  renderer.domElement.style.top = 0;
+  renderer.domElement.style.left = 0;
+  document.body.appendChild(renderer.domElement);
 
-// Ground (a long plane for scrolling)
-const groundGeo = new THREE.PlaneGeometry(200, 400);
-const groundMat = new THREE.MeshStandardMaterial({ color: 0x222222, side: THREE.DoubleSide });
-const ground = new THREE.Mesh(groundGeo, groundMat);
-ground.rotation.x = -Math.PI / 2;
-ground.position.y = 0;
-ground.position.z = -200;
-scene.add(ground);
+  // Floor
+  const floorGeometry = new THREE.PlaneGeometry(200, 200);
+  const floorMaterial = new THREE.MeshStandardMaterial({ color: 0x111111 });
+  floor = new THREE.Mesh(floorGeometry, floorMaterial);
+  floor.rotation.x = -Math.PI / 2;
+  scene.add(floor);
 
-// Movement
-let moveLeft = false;
-let moveRight = false;
-let boost = false;
-let speed = 0.3;
+  // Craft
+  const geometry = new THREE.BoxGeometry(1.5, 0.5, 2);
+  const material = new THREE.MeshStandardMaterial({ color: 0x008080 });
+  craft = new THREE.Mesh(geometry, material);
+  craft.position.y = 0.5;
+  scene.add(craft);
 
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'a' || e.key === 'A') moveLeft = true;
-    if (e.key === 'd' || e.key === 'D') moveRight = true;
-    if (e.key === 'Shift') boost = true;
-});
-document.addEventListener('keyup', (e) => {
-    if (e.key === 'a' || e.key === 'A') moveLeft = false;
-    if (e.key === 'd' || e.key === 'D') moveRight = false;
-    if (e.key === 'Shift') boost = false;
-});
+  // Light
+  const light = new THREE.PointLight(0xffffff, 1);
+  light.position.set(10, 10, 10);
+  scene.add(light);
 
-function animate() {
-    requestAnimationFrame(animate);
-
-    // Hover left/right
-    if (moveLeft) hovercraft.position.x -= 0.2;
-    if (moveRight) hovercraft.position.x += 0.2;
-
-    // Scroll ground to simulate movement
-    ground.position.z += boost ? speed * 3 : speed;
-
-    // Reset ground to loop
-    if (ground.position.z > 0) {
-        ground.position.z = -200;
-    }
-
-    renderer.render(scene, camera);
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
 }
 
-animate();
+function animate() {
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+}
