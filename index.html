@@ -2,26 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hover Drive</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="ui">
-    <h1>🛸 Hover Drive is Online!</h1>
+    <h1>🛸 <span class="highlight">Hover Drive is Online!</span></h1>
     <p>Fly your hovercraft with W / A / D – Hold Shift to boost</p>
-    <button onclick="toggleDayNight()">🌍 Toggle Day/Night</button>
-    <button onclick="toggleMusic()">🎵 Play/Stop Music</button>
+    <button id="toggleTheme">🎡 Toggle Day/Night</button>
+    <button id="musicToggle">🎵 Play/Stop Music</button>
   </div>
 
-  <!-- Background Music -->
-  <audio id="bg-music" loop>
-    <source src="assets/audio/Relax Ambient.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-
   <!-- Scripts -->
-  <script src="https://cdn.skypack.dev/three"></script>
   <script src="hover.js"></script>
   <script src="script.js"></script>
 </body>
